@@ -2,7 +2,7 @@ import os
 from azure.storage.blob import BlobServiceClient
 from flask import Flask, request, redirect
 
-FRT_APP = Flask(__name__)
+app = Flask(__name__)
 
 connect_str = os.getenv('AZURE_STORAGE_CONNECTION_STRING') # retrieve the connection string from the environment variable
 container_name = "photos" # container name in which images will be store in the storage account
@@ -16,7 +16,7 @@ except Exception as e:
     print("Creating container...")
     container_client = blob_service_client.create_container(container_name) # create a container in the storage account if it does not exist
 
-@FRT_APP.route("/")
+@app.route("https://frtcloudappproject.azurewebsites.net")
 def view_photos():
     blob_items = container_client.list_blobs() # list all the blobs in the container
 
@@ -57,7 +57,7 @@ def view_photos():
     """ + img_html + "</div></body>"
 
 #flask endpoint to upload a photo
-@FRT_APP.route("/upload-photos", methods=["POST"])
+@app.route("/upload-photos", methods=["POST"])
 def upload_photos():
     filenames = ""
 
