@@ -1,0 +1,7 @@
+pip install flask
+
+pip install azure-storage-blob
+
+set FLASK_APP=app
+
+flask run
